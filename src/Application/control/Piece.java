@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class Piece {
 
+    // static properties and methods:
+
     public static ArrayList<Piece> pieceRef = new ArrayList<>();
+
+    // instance properties and methods:
 
     public Coordinate position;
     public Tile[] tileRef;

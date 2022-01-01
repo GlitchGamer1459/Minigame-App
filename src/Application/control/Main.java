@@ -7,5 +7,13 @@ public class Main {
         ChessPanel game = new ChessPanel();
 
         frame.setActiveScreen(game);
+
+        /*
+         if I don't call these the program has a seizure.
+         it refuses to print anything to the frame,
+         and I don't know WHY
+        */
+        frame.revalidate();
+        frame.repaint();
     }
 }

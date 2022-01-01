@@ -7,11 +7,12 @@ public class Tile extends JLabel {
 
     public int id;
 
-    public Piece occupyingPiece;
+    public Piece occupyingPiece = null;
 
-    Tile(Color color, int idIn) {
+    Tile(Color background, Color text, int idIn) {
         this.setOpaque(true);
-        this.setBackground(color);
+        this.setBackground(background);
+        this.setForeground(text);
         this.setVisible(true);
 
         id = idIn;

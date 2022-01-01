@@ -1,5 +1,6 @@
 package Application.control;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Piece {
@@ -14,14 +15,23 @@ public class Piece {
     public Tile[] tileRef;
     public int ID;
 
+    protected String descriptor = "piece";
+
     public void move(Coordinate moveTo) {
         int i = Coordinate.getIndexFromCoordinate(this.position);
         tileRef[i].occupyingPiece = null;
 
-        position = moveTo;
+        if (constraints()) {
+            position = moveTo;
+        }
 
         int o = Coordinate.getIndexFromCoordinate(this.position);
         tileRef[o].occupyingPiece = this;
+    }
+
+    // method to be overridden
+    protected boolean constraints() {
+        return true;
     }
 
     public Piece(Coordinate inCoords, int id, Tile[] tileRefIn) {

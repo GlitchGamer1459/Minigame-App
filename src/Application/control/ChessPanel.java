@@ -27,11 +27,14 @@ public class ChessPanel extends JPanel implements MouseListener {
 
         this.setVisible(true);
 
-        testing();
+        init();
     }
 
-    private void testing() {
+    private void init() {
         Piece piece = new Piece(new Coordinate(2, 0), 0, tileRef);
+        Piece piece2 = new Piece(new Coordinate(2, 2), 0, tileRef);
+
+        drawPieces();
     }
 
     private void setTileArray() {
@@ -48,24 +51,29 @@ public class ChessPanel extends JPanel implements MouseListener {
     private void setTileRow(boolean startBlack) {
         boolean printBlack;
         Color colorToPrint;
+        Color textColor;
         int cap = saved + 8;
 
         if (startBlack) {
             printBlack = true;
             colorToPrint = Color.BLACK;
+            textColor = Color.WHITE;
         } else {
             printBlack = false;
             colorToPrint = Color.WHITE;
+            textColor = Color.BLACK;
         }
 
         for (int i = saved; i < cap; i++) {
-            tileRef[i] = new Tile(colorToPrint, i);
+            tileRef[i] = new Tile(colorToPrint, textColor, i);
 
             if (printBlack) {
                 colorToPrint = Color.WHITE;
+                textColor = Color.BLACK;
                 printBlack = false;
             } else {
                 colorToPrint = Color.BLACK;
+                textColor = Color.WHITE;
                 printBlack = true;
             }
 
@@ -81,7 +89,7 @@ public class ChessPanel extends JPanel implements MouseListener {
         for (Piece piece : Piece.pieceRef) {
             int pos = Coordinate.getIndexFromCoordinate(piece.position);
 
-            tileRef[pos].setText("test");
+            tileRef[pos].setText(piece.descriptor);
         }
     }
 
@@ -91,9 +99,11 @@ public class ChessPanel extends JPanel implements MouseListener {
             int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
             int fromY = (int)(e.getY() / tileRef[0].getHeight());
             int fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
-            pieceToMove = tileRef[fromIndex].occupyingPiece;
 
-            didFirstClick = true;
+            if (tileRef[fromIndex].occupyingPiece != null) {
+                pieceToMove = tileRef[fromIndex].occupyingPiece;
+                didFirstClick = true;
+            }
         } else {
             int toX = (int)(e.getX() / tileRef[0].getWidth());
             int toY = (int)(e.getY() / tileRef[0].getHeight());

@@ -1,4 +1,6 @@
-package Application.control;
+package Application.chess;
+
+import Application.chess.pieces.Queen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,8 @@ public class ChessPanel extends JPanel implements MouseListener {
     private int saved = 0;
     private boolean didFirstClick = false;
     private Piece pieceToMove;
+    private int fromIndex;
+
 
     public ChessPanel() {
         setLayout(new GridLayout(8,8));
@@ -31,8 +35,8 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     private void init() {
-        Piece piece = new Piece(new Coordinate(2, 0), 0, tileRef);
-        Piece piece2 = new Piece(new Coordinate(2, 2), 0, tileRef);
+        Piece piece = new Piece(new Coordinate(2, 0), 0, tileRef, Piece.TEAM_BLACK);
+        Queen piece2 = new Queen(new Coordinate(3, 4), 0, tileRef, Piece.TEAM_WHITE);
 
         drawPieces();
     }
@@ -86,10 +90,10 @@ public class ChessPanel extends JPanel implements MouseListener {
             tile.setText("");
         }
 
-        for (Piece piece : Piece.pieceRef) {
-            int pos = Coordinate.getIndexFromCoordinate(piece.position);
-
-            tileRef[pos].setText(piece.descriptor);
+        for (Tile tile : tileRef) {
+            if (tile.occupyingPiece != null) {
+                tile.setText(tile.occupyingPiece.type + tile.occupyingPiece.team);
+            }
         }
     }
 
@@ -98,19 +102,31 @@ public class ChessPanel extends JPanel implements MouseListener {
         if (!didFirstClick) {
             int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
             int fromY = (int)(e.getY() / tileRef[0].getHeight());
-            int fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
+            fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
 
             if (tileRef[fromIndex].occupyingPiece != null) {
                 pieceToMove = tileRef[fromIndex].occupyingPiece;
                 didFirstClick = true;
+
+                tileRef[fromIndex].setAsSelected(true);
             }
         } else {
             int toX = (int)(e.getX() / tileRef[0].getWidth());
             int toY = (int)(e.getY() / tileRef[0].getHeight());
+            int toIndex = Coordinate.getIndexFromCoordinate(new Coordinate(toX, toY));
 
-            pieceToMove.move(new Coordinate(toX, toY));
+            if (tileRef[toIndex].occupyingPiece != null) {
+                if (tileRef[toIndex].occupyingPiece.team != pieceToMove.team) {
+                    tileRef[toIndex].occupyingPiece = null;
+                    pieceToMove.move(new Coordinate(toX, toY));
+                }
+            } else {
+                pieceToMove.move(new Coordinate(toX, toY));
+            }
 
             didFirstClick = false;
+
+            tileRef[fromIndex].setAsSelected(false);
         }
 
         drawPieces();

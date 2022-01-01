@@ -1,5 +1,7 @@
 package Application.control;
 
+import Application.chess.ChessPanel;
+
 public class Main {
 
     public static void main(String[] args) {

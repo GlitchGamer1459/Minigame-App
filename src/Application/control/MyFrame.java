@@ -5,7 +5,7 @@ import javax.swing.*;
 public class MyFrame extends JFrame {
 
     public MyFrame() {
-        this.setSize(400,400);
+        this.setSize(800,800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Chess");
         this.setVisible(true);

@@ -1,4 +1,4 @@
-package Application.control;
+package Application.chess;
 
 public class Coordinate {
 
@@ -14,8 +14,8 @@ public class Coordinate {
 
     // instance properties and methods:
 
-    int x;
-    int y;
+    public int x;
+    public int y;
 
     public Coordinate(int X, int Y) {
         x = X;

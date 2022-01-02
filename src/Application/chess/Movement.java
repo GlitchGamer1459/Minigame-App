@@ -82,29 +82,68 @@ public class Movement {
                 toIndex == origIndex + 56;
     }
 
-    public static boolean canMoveLeftStraightFar(Coordinate moveTo, Coordinate origin) {
+    public static boolean canMoveLeftToRightStraightFar(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
         int origIndex = Coordinate.getIndexFromCoordinate(origin);
 
-        return toIndex == origIndex - 1 ||
-                toIndex == origIndex - 2 ||
-                toIndex == origIndex - 3 ||
-                toIndex == origIndex - 4 ||
-                toIndex == origIndex - 5 ||
-                toIndex == origIndex - 6 ||
-                toIndex == origIndex - 7;
-    }
-
-    public static boolean canMoveRightStraightFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
-
-        return toIndex == origIndex + 1 ||
-                toIndex == origIndex + 2 ||
-                toIndex == origIndex + 3 ||
-                toIndex == origIndex + 4 ||
-                toIndex == origIndex + 5 ||
-                toIndex == origIndex + 6 ||
-                toIndex == origIndex + 7;
+        return switch (moveTo.x) {
+            case 0 -> toIndex == origIndex + 1 ||
+                    toIndex == origIndex + 2 ||
+                    toIndex == origIndex + 3 ||
+                    toIndex == origIndex + 4 ||
+                    toIndex == origIndex + 5 ||
+                    toIndex == origIndex + 6 ||
+                    toIndex == origIndex + 7;
+            case 1 -> toIndex == origIndex - 1 ||
+                    toIndex == origIndex + 1 ||
+                    toIndex == origIndex + 2 ||
+                    toIndex == origIndex + 3 ||
+                    toIndex == origIndex + 4 ||
+                    toIndex == origIndex + 5 ||
+                    toIndex == origIndex + 6;
+            case 2 -> toIndex == origIndex - 2 ||
+                    toIndex == origIndex - 1 ||
+                    toIndex == origIndex + 1 ||
+                    toIndex == origIndex + 2 ||
+                    toIndex == origIndex + 3 ||
+                    toIndex == origIndex + 4 ||
+                    toIndex == origIndex + 5;
+            case 3 -> toIndex == origIndex - 3 ||
+                    toIndex == origIndex - 2 ||
+                    toIndex == origIndex - 1 ||
+                    toIndex == origIndex + 1 ||
+                    toIndex == origIndex + 2 ||
+                    toIndex == origIndex + 3 ||
+                    toIndex == origIndex + 4;
+            case 4 -> toIndex == origIndex - 4 ||
+                    toIndex == origIndex - 3 ||
+                    toIndex == origIndex - 2 ||
+                    toIndex == origIndex - 1 ||
+                    toIndex == origIndex + 1 ||
+                    toIndex == origIndex + 2 ||
+                    toIndex == origIndex + 3;
+            case 5 -> toIndex == origIndex - 5 ||
+                    toIndex == origIndex - 4 ||
+                    toIndex == origIndex - 3 ||
+                    toIndex == origIndex - 2 ||
+                    toIndex == origIndex - 1 ||
+                    toIndex == origIndex + 1 ||
+                    toIndex == origIndex + 2;
+            case 6 -> toIndex == origIndex - 6 ||
+                    toIndex == origIndex - 5 ||
+                    toIndex == origIndex - 4 ||
+                    toIndex == origIndex - 3 ||
+                    toIndex == origIndex - 2 ||
+                    toIndex == origIndex - 1 ||
+                    toIndex == origIndex + 1;
+            case 7 -> toIndex == origIndex - 7 ||
+                    toIndex == origIndex - 6 ||
+                    toIndex == origIndex - 5 ||
+                    toIndex == origIndex - 4 ||
+                    toIndex == origIndex - 3 ||
+                    toIndex == origIndex - 2 ||
+                    toIndex == origIndex - 1;
+            default -> false;
+        };
     }
 }

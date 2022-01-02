@@ -13,8 +13,7 @@ public class Queen extends Piece {
                 Movement.canMoveDownRightFar(moveTo, origin) ||
                 Movement.canMoveUpRightFar(moveTo, origin) ||
                 Movement.canMoveDownLeftFar(moveTo, origin) ||
-                Movement.canMoveLeftStraightFar(moveTo, origin) ||
-                Movement.canMoveRightStraightFar(moveTo, origin) ||
+                Movement.canMoveLeftToRightStraightFar(moveTo, origin) ||
                 Movement.canMoveUpStraightFar(moveTo, origin) ||
                 Movement.canMoveDownStraightFar(moveTo, origin);
     }

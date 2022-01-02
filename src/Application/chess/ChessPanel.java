@@ -1,6 +1,8 @@
 package Application.chess;
 
+import Application.chess.pieces.Bishop;
 import Application.chess.pieces.Queen;
+import Application.chess.pieces.Rook;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +38,9 @@ public class ChessPanel extends JPanel implements MouseListener {
 
     private void init() {
         Piece piece = new Piece(new Coordinate(2, 0), 0, tileRef, Piece.TEAM_BLACK);
-        Queen piece2 = new Queen(new Coordinate(3, 4), 0, tileRef, Piece.TEAM_WHITE);
+        Queen queen = new Queen(new Coordinate(3, 4), 1, tileRef, Piece.TEAM_WHITE);
+        Rook rook = new Rook(new Coordinate(0, 2), 2, tileRef, Piece.TEAM_WHITE);
+        Bishop bishop = new Bishop(new Coordinate(4,4), 3, tileRef, Piece.TEAM_BLACK);
 
         drawPieces();
     }

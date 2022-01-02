@@ -10,6 +10,8 @@ public class Piece {
 
     public static String TYPE_GENERIC = "piece";
     public static String TYPE_QUEEN = "queen";
+    public static String TYPE_ROOK = "rook";
+    public static String TYPE_BISHOP = "bishop";
 
     public static int TEAM_BLACK = 1;
     public static int TEAM_WHITE = 0;

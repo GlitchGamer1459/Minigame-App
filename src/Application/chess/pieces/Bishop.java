@@ -8,7 +8,7 @@ import Application.chess.Tile;
 public class Bishop extends Piece {
 
     @Override
-    protected boolean constraints(Coordinate moveTo, Coordinate origin) {
+    public boolean constraints(Coordinate moveTo, Coordinate origin) {
         return Movement.canMoveUpLeftFar(moveTo, origin) ||
                 Movement.canMoveDownRightFar(moveTo, origin) ||
                 Movement.canMoveUpRightFar(moveTo, origin) ||
@@ -16,6 +16,6 @@ public class Bishop extends Piece {
     }
 
     public Bishop(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
-        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_QUEEN);
+        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_BISHOP);
     }
 }

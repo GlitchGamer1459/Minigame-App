@@ -37,10 +37,10 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     private void init() {
-        Piece piece = new Piece(new Coordinate(2, 0), 0, tileRef, Piece.TEAM_BLACK);
-        Queen queen = new Queen(new Coordinate(3, 4), 1, tileRef, Piece.TEAM_WHITE);
-        Rook rook = new Rook(new Coordinate(0, 2), 2, tileRef, Piece.TEAM_WHITE);
-        Bishop bishop = new Bishop(new Coordinate(4,4), 3, tileRef, Piece.TEAM_BLACK);
+        new Piece(new Coordinate(2, 0), 0, tileRef, Piece.TEAM_BLACK);
+        new Queen(new Coordinate(3, 4), 1, tileRef, Piece.TEAM_WHITE);
+        new Rook(new Coordinate(0, 2), 2, tileRef, Piece.TEAM_WHITE);
+        new Bishop(new Coordinate(4,4), 3, tileRef, Piece.TEAM_BLACK);
 
         drawPieces();
     }
@@ -102,42 +102,41 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        if (!didFirstClick) {
-            int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
-            int fromY = (int)(e.getY() / tileRef[0].getHeight());
-            fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
+    public void mousePressed(MouseEvent e) {if (!didFirstClick) {
+        int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
+        int fromY = (int)(e.getY() / tileRef[0].getHeight());
+        fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
 
-            if (tileRef[fromIndex].occupyingPiece != null) {
-                pieceToMove = tileRef[fromIndex].occupyingPiece;
-                didFirstClick = true;
+        if (tileRef[fromIndex].occupyingPiece != null) {
+            pieceToMove = tileRef[fromIndex].occupyingPiece;
+            didFirstClick = true;
 
-                tileRef[fromIndex].setAsSelected(true);
-            }
-        } else {
-            int toX = (int)(e.getX() / tileRef[0].getWidth());
-            int toY = (int)(e.getY() / tileRef[0].getHeight());
-            int toIndex = Coordinate.getIndexFromCoordinate(new Coordinate(toX, toY));
+            tileRef[fromIndex].setAsSelected(true);
+        }
+    } else {
+        int toX = (int)(e.getX() / tileRef[0].getWidth());
+        int toY = (int)(e.getY() / tileRef[0].getHeight());
+        int toIndex = Coordinate.getIndexFromCoordinate(new Coordinate(toX, toY));
 
-            if (tileRef[toIndex].occupyingPiece != null) {
-                if (tileRef[toIndex].occupyingPiece.team != pieceToMove.team) {
-                    tileRef[toIndex].occupyingPiece = null;
-                    pieceToMove.move(new Coordinate(toX, toY));
-                }
-            } else {
+        if (tileRef[toIndex].occupyingPiece != null) {
+            if (tileRef[toIndex].occupyingPiece.team != pieceToMove.team) {
+                tileRef[toIndex].occupyingPiece = null;
                 pieceToMove.move(new Coordinate(toX, toY));
             }
-
-            didFirstClick = false;
-
-            tileRef[fromIndex].setAsSelected(false);
+        } else {
+            pieceToMove.move(new Coordinate(toX, toY));
         }
+
+        didFirstClick = false;
+
+        tileRef[fromIndex].setAsSelected(false);
+    }
 
         drawPieces();
     }
 
-    @Override public void mousePressed(MouseEvent e) {}
     @Override public void mouseReleased(MouseEvent e) {}
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
+    @Override public void mouseClicked(MouseEvent e) {}
 }

@@ -1,8 +1,10 @@
 package Application.chess;
 
+import Application.chess.pieces.PieceTemplate;
+
 import java.util.ArrayList;
 
-public class Piece {
+public class Piece implements PieceTemplate {
 
     // static properties and methods:
 
@@ -37,16 +39,6 @@ public class Piece {
         tileRef[o].occupyingPiece = this;
     }
 
-    // method will be overridden
-    protected boolean constraints(Coordinate moveTo, Coordinate position) {
-        return true;
-    }
-
-    // method will be overridden
-    protected Tile[] findAllViableMoves() {
-        return null;
-    }
-
     public Piece(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
         position = new Coordinate(inCoords.x, inCoords.y);
         tileRef = tileRefIn;
@@ -70,5 +62,10 @@ public class Piece {
         tileRef[i].occupyingPiece = this;
 
         pieceRef.add(this);
+    }
+
+    @Override
+    public boolean constraints(Coordinate moveTo, Coordinate position) {
+        return true;
     }
 }

@@ -86,7 +86,7 @@ public class Movement {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
         int origIndex = Coordinate.getIndexFromCoordinate(origin);
 
-        return switch (moveTo.x) {
+        return switch (origin.x) {
             case 0 -> toIndex == origIndex + 1 ||
                     toIndex == origIndex + 2 ||
                     toIndex == origIndex + 3 ||

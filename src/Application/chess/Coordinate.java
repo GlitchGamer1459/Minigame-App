@@ -9,7 +9,7 @@ public class Coordinate {
     }
 
     public static Coordinate getCoordinateFromIndex(int position) {
-        return new Coordinate(position % 8, (int)(position / 8));
+        return new Coordinate(position % 8, (int)(position / 8.0f));
     }
 
     // instance properties and methods:

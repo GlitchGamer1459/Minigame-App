@@ -8,7 +8,7 @@ import Application.chess.Movement;
 public class Queen extends Piece {
 
     @Override
-    protected boolean constraints(Coordinate moveTo, Coordinate origin) {
+    public boolean constraints(Coordinate moveTo, Coordinate origin) {
         return Movement.canMoveUpLeftFar(moveTo, origin) ||
                 Movement.canMoveDownRightFar(moveTo, origin) ||
                 Movement.canMoveUpRightFar(moveTo, origin) ||

@@ -27,18 +27,6 @@ public class Piece implements PieceTemplate {
 
     protected String type = TYPE_GENERIC;
 
-    public void move(Coordinate moveTo) {
-        int i = Coordinate.getIndexFromCoordinate(this.position);
-        tileRef[i].occupyingPiece = null;
-
-        if (constraints(moveTo, position)) {
-            position = moveTo;
-        }
-
-        int o = Coordinate.getIndexFromCoordinate(this.position);
-        tileRef[o].occupyingPiece = this;
-    }
-
     public Piece(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
         position = new Coordinate(inCoords.x, inCoords.y);
         tileRef = tileRefIn;
@@ -62,6 +50,18 @@ public class Piece implements PieceTemplate {
         tileRef[i].occupyingPiece = this;
 
         pieceRef.add(this);
+    }
+
+    public void move(Coordinate moveTo) {
+        int i = Coordinate.getIndexFromCoordinate(this.position);
+        tileRef[i].occupyingPiece = null;
+
+        if (constraints(moveTo, position)) {
+            position = moveTo;
+        }
+
+        int o = Coordinate.getIndexFromCoordinate(this.position);
+        tileRef[o].occupyingPiece = this;
     }
 
     @Override

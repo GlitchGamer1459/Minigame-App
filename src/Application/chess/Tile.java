@@ -9,6 +9,18 @@ public class Tile extends JLabel {
     public Piece occupyingPiece = null;
     private final Color background;
 
+    public Tile(Color backgroundIn, Color text, int idIn) {
+        this.setOpaque(true);
+
+        background = backgroundIn;
+        this.setBackground(background);
+
+        this.setForeground(text);
+        this.setVisible(true);
+
+        id = idIn;
+    }
+
     public void setAsSelected(boolean isActive) {
         if (isActive) {
             if (background == Color.BLACK) {
@@ -31,17 +43,5 @@ public class Tile extends JLabel {
         } else {
             setBackground(background);
         }
-    }
-
-    Tile(Color backgroundIn, Color text, int idIn) {
-        this.setOpaque(true);
-
-        background = backgroundIn;
-        this.setBackground(background);
-
-        this.setForeground(text);
-        this.setVisible(true);
-
-        id = idIn;
     }
 }

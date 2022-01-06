@@ -1,8 +1,6 @@
 package Application.chess;
 
-import Application.chess.pieces.Bishop;
-import Application.chess.pieces.Queen;
-import Application.chess.pieces.Rook;
+import Application.chess.pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +21,7 @@ public class ChessPanel extends JPanel implements MouseListener {
         setLayout(new GridLayout(8,8));
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
-        setTileArray();
+        setTileReference();
 
         for (Tile tile : tileRef) {
             add(tile);
@@ -37,15 +35,13 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     private void init() {
-        new Piece(new Coordinate(2, 0), 0, tileRef, Piece.TEAM_BLACK);
-        new Queen(new Coordinate(3, 4), 1, tileRef, Piece.TEAM_WHITE);
-        new Rook(new Coordinate(0, 2), 2, tileRef, Piece.TEAM_WHITE);
-        new Bishop(new Coordinate(4,4), 3, tileRef, Piece.TEAM_BLACK);
+        new Rook(new Coordinate(5,1), 0, tileRef, Piece.TEAM_BLACK);
+        new Piece(new Coordinate(5, 5), 1, tileRef, Piece.TEAM_WHITE);
 
         drawPieces();
     }
 
-    private void setTileArray() {
+    private void setTileReference() {
         setTileRow(false);
         setTileRow(true);
         setTileRow(false);
@@ -102,35 +98,41 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {if (!didFirstClick) {
-        int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
-        int fromY = (int)(e.getY() / tileRef[0].getHeight());
-        fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
+    public void mousePressed(MouseEvent e) {
+        if (!didFirstClick) {
+            int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
+            int fromY = (int)(e.getY() / tileRef[0].getHeight());
+            fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
 
-        if (tileRef[fromIndex].occupyingPiece != null) {
-            pieceToMove = tileRef[fromIndex].occupyingPiece;
-            didFirstClick = true;
+            if (tileRef[fromIndex].occupyingPiece != null) {
+                pieceToMove = tileRef[fromIndex].occupyingPiece;
+                didFirstClick = true;
 
-            tileRef[fromIndex].setAsSelected(true);
-        }
-    } else {
-        int toX = (int)(e.getX() / tileRef[0].getWidth());
-        int toY = (int)(e.getY() / tileRef[0].getHeight());
-        int toIndex = Coordinate.getIndexFromCoordinate(new Coordinate(toX, toY));
-
-        if (tileRef[toIndex].occupyingPiece != null) {
-            if (tileRef[toIndex].occupyingPiece.team != pieceToMove.team) {
-                tileRef[toIndex].occupyingPiece = null;
-                pieceToMove.move(new Coordinate(toX, toY));
+                tileRef[fromIndex].setAsSelected(true);
+                tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(true);
             }
         } else {
-            pieceToMove.move(new Coordinate(toX, toY));
+            int toX = (int)(e.getX() / tileRef[0].getWidth());
+            int toY = (int)(e.getY() / tileRef[0].getHeight());
+            int toIndex = Coordinate.getIndexFromCoordinate(new Coordinate(toX, toY));
+
+            if (tileRef[toIndex].occupyingPiece != null) {
+                tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(false);
+
+                if (tileRef[toIndex].occupyingPiece.team != pieceToMove.team) {
+                    tileRef[toIndex].occupyingPiece = null;
+
+                    pieceToMove.move(new Coordinate(toX, toY));
+                }
+            } else {
+                tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(false);
+                pieceToMove.move(new Coordinate(toX, toY));
+            }
+
+            didFirstClick = false;
+
+            tileRef[fromIndex].setAsSelected(false);
         }
-
-        didFirstClick = false;
-
-        tileRef[fromIndex].setAsSelected(false);
-    }
 
         drawPieces();
     }

@@ -7,6 +7,10 @@ import Application.chess.Tile;
 
 public class Rook extends Piece {
 
+    public Rook(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
+        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_ROOK);
+    }
+
     @Override
     public boolean constraints(Coordinate moveTo, Coordinate origin) {
         return Movement.canMoveLeftToRightStraightFar(moveTo, origin) ||
@@ -14,7 +18,12 @@ public class Rook extends Piece {
                 Movement.canMoveDownStraightFar(moveTo, origin);
     }
 
-    public Rook(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
-        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_ROOK);
+    @Override
+    public void highlightAllViableMoves(boolean on) {
+        if (on) {
+            System.out.println("rookOn");
+        } else {
+            System.out.println("rookOff");
+        }
     }
 }

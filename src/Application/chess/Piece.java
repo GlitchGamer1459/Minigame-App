@@ -14,6 +14,8 @@ public class Piece implements PieceTemplate {
     public static String TYPE_QUEEN = "queen";
     public static String TYPE_ROOK = "rook";
     public static String TYPE_BISHOP = "bishop";
+    public static String TYPE_HORSE = "horse";
+    public static String TYPE_PAWN = "pawn";
 
     public static int TEAM_BLACK = 1;
     public static int TEAM_WHITE = 0;
@@ -48,8 +50,6 @@ public class Piece implements PieceTemplate {
 
         int i = Coordinate.getIndexFromCoordinate(this.position);
         tileRef[i].occupyingPiece = this;
-
-        pieceRef.add(this);
     }
 
     public void move(Coordinate moveTo) {
@@ -67,5 +67,14 @@ public class Piece implements PieceTemplate {
     @Override
     public boolean constraints(Coordinate moveTo, Coordinate position) {
         return true;
+    }
+
+    @Override
+    public void highlightAllViableMoves(boolean on) {
+        if (on) {
+            System.out.println("pieceOn");
+        } else {
+            System.out.println("pieceOff");
+        }
     }
 }

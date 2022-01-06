@@ -5,4 +5,6 @@ import Application.chess.Coordinate;
 public interface PieceTemplate {
 
     boolean constraints(Coordinate moveTo, Coordinate position);
+
+    void highlightAllViableMoves(boolean on);
 }

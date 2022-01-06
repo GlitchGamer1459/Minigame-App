@@ -146,4 +146,18 @@ public class Movement {
             default -> false;
         };
     }
+
+    public static boolean canMoveHorse(Coordinate moveTo, Coordinate origin) {
+        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
+        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+
+        return toIndex == origIndex - 6 ||
+                toIndex == origIndex - 10 ||
+                toIndex == origIndex - 15 ||
+                toIndex == origIndex - 17 ||
+                toIndex == origIndex + 6 ||
+                toIndex == origIndex + 10 ||
+                toIndex == origIndex + 15 ||
+                toIndex == origIndex + 17;
+    }
 }

@@ -56,8 +56,18 @@ public class Piece implements PieceTemplate {
         int i = Coordinate.getIndexFromCoordinate(this.position);
         tileRef[i].occupyingPiece = null;
 
+        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
+
         if (constraints(moveTo, position)) {
-            position = moveTo;
+            if (tileRef[toIndex].occupyingPiece != null) {
+                if (tileRef[toIndex].occupyingPiece.team != this.team) {
+                    tileRef[toIndex].occupyingPiece = null;
+
+                    position = moveTo;
+                }
+            } else {
+                position = moveTo;
+            }
         }
 
         int o = Coordinate.getIndexFromCoordinate(this.position);
@@ -71,10 +81,12 @@ public class Piece implements PieceTemplate {
 
     @Override
     public void highlightAllViableMoves(boolean on) {
-        if (on) {
-            System.out.println("pieceOn");
-        } else {
-            System.out.println("pieceOff");
+        for (Tile tile : tileRef) {
+            if (tile.occupyingPiece != null && tile.occupyingPiece.team != this.team) {
+                tile.setAsViable(on);
+            } else if (tile.occupyingPiece == null) {
+                tile.setAsViable(on);
+            }
         }
     }
 }

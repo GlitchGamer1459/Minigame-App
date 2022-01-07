@@ -114,20 +114,10 @@ public class ChessPanel extends JPanel implements MouseListener {
         } else {
             int toX = (int)(e.getX() / tileRef[0].getWidth());
             int toY = (int)(e.getY() / tileRef[0].getHeight());
-            int toIndex = Coordinate.getIndexFromCoordinate(new Coordinate(toX, toY));
 
-            if (tileRef[toIndex].occupyingPiece != null) {
-                tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(false);
+            tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(false);
 
-                if (tileRef[toIndex].occupyingPiece.team != pieceToMove.team) {
-                    tileRef[toIndex].occupyingPiece = null;
-
-                    pieceToMove.move(new Coordinate(toX, toY));
-                }
-            } else {
-                tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(false);
-                pieceToMove.move(new Coordinate(toX, toY));
-            }
+            pieceToMove.move(new Coordinate(toX, toY));
 
             didFirstClick = false;
 

@@ -1,8 +1,8 @@
 package Application.chess;
 
-public class Movement {
+public final class Movement {
 
-    // static constraint functions to apply to pieces in overridden constraint method:
+    // static constraint methods to apply to pieces in overridden constraint method:
 
     public static boolean canMoveUpLeftFar(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
@@ -159,5 +159,83 @@ public class Movement {
                 toIndex == origIndex + 10 ||
                 toIndex == origIndex + 15 ||
                 toIndex == origIndex + 17;
+    }
+
+    // static highlighting methods to apply to pieces in overridden highlightAllViableMoves method:
+
+    public static void highlightUpFar(Tile[] tileRef, boolean on, Piece piece){
+        int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
+        boolean running = true;
+
+        while (running) {
+            scanIndex -= 8;
+
+            if (scanIndex < 0) {
+                running = false;
+            } else if (tileRef[scanIndex].occupyingPiece == null) {
+                tileRef[scanIndex].setAsViable(on);
+            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team != piece.team) {
+                tileRef[scanIndex].setAsViable(on);
+
+                running = false;
+            } else {
+                running = false;
+            }
+        }
+    }
+
+    public static void highlightDownFar(Tile[] tileRef, boolean on, Piece piece) {
+        int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
+        boolean running = true;
+
+        while (running) {
+            scanIndex += 8;
+
+            if (scanIndex > 63) {
+                running = false;
+            } else if (tileRef[scanIndex].occupyingPiece == null) {
+                tileRef[scanIndex].setAsViable(on);
+            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team != piece.team) {
+                tileRef[scanIndex].setAsViable(on);
+
+                running = false;
+            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team == piece.team) {
+                running = false;
+            }
+        }
+    }
+
+    public static void highlightStraightRightFar(Tile[] tileRef, boolean on, Piece piece) {
+        int posIndex = Coordinate.getIndexFromCoordinate(piece.position);
+        int limiter = posIndex + (7 - piece.position.x);
+
+        for (int i = posIndex + 1; i < limiter + 1; i++) {
+            if (tileRef[i].occupyingPiece == null) {
+                tileRef[i].setAsViable(on);
+            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team != piece.team) {
+                tileRef[i].setAsViable(on);
+                break;
+            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team == piece.team) {
+                break;
+            }
+        }
+    }
+
+    public static void highlightStraightLeftFar(Tile[] tileRef, boolean on, Piece piece) {
+        // highlight to the left of piece
+        int posIndex = Coordinate.getIndexFromCoordinate(piece.position);
+
+        int limiter = posIndex - piece.position.x;
+
+        for (int i = posIndex - 1; i > limiter - 1; i--) {
+            if (tileRef[i].occupyingPiece == null) {
+                tileRef[i].setAsViable(on);
+            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team != piece.team) {
+                tileRef[i].setAsViable(on);
+                break;
+            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team == piece.team) {
+                break;
+            }
+        }
     }
 }

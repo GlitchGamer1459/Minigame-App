@@ -20,55 +20,9 @@ public class Rook extends Piece {
 
     @Override
     public void highlightAllViableMoves(boolean on) {
-        int scanIndex = Coordinate.getIndexFromCoordinate(this.position);
-        boolean running = true;
-
-
-        while (running) {
-            scanIndex -= 8;
-
-            if (scanIndex < 0) {
-                running = false;
-            } else if (tileRef[scanIndex].occupyingPiece == null) {
-                tileRef[scanIndex].setAsViable(on);
-            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team != this.team) {
-                tileRef[scanIndex].setAsViable(on);
-
-                running = false;
-            } else {
-                running = false;
-            }
-        }
-
-        running = true;
-
-        while (running) {
-            scanIndex += 8;
-
-            if (scanIndex > 63) {
-                running = false;
-            } else if (tileRef[scanIndex].occupyingPiece == null) {
-                tileRef[scanIndex].setAsViable(on);
-            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team != this.team) {
-                tileRef[scanIndex].setAsViable(on);
-
-                running = false;
-            }
-        }
-
-        int posIndex = Coordinate.getIndexFromCoordinate(position);
-
-        int limiter = position.x + (7 - position.x);
-
-        for (int i = position.x; i < limiter; i++) {
-            if (tileRef[posIndex + i].occupyingPiece == null) {
-                tileRef[posIndex + i].setAsViable(on);
-            } else if (tileRef[posIndex + i].occupyingPiece != null && tileRef[posIndex + i].occupyingPiece.team != team) {
-                tileRef[posIndex + i].setAsViable(on);
-                break;
-            } else if (tileRef[posIndex + i].occupyingPiece != null && tileRef[posIndex + i].occupyingPiece.team == team) {
-                break;
-            }
-        }
+        Movement.highlightUpFar(tileRef, on, this);
+        Movement.highlightDownFar(tileRef, on, this);
+        Movement.highlightStraightRightFar(tileRef, on, this);
+        Movement.highlightStraightLeftFar(tileRef, on, this);
     }
 }

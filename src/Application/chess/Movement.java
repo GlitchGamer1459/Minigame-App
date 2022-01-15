@@ -238,4 +238,20 @@ public final class Movement {
             }
         }
     }
+
+    @Deprecated
+    public static void highlightUpLeftFar(Tile[] tileRef, boolean on, Piece piece) {
+        int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
+
+        while (true) {
+            scanIndex -= 9;
+
+            if (scanIndex < 0) {
+                break;
+            }
+            if (tileRef[scanIndex].occupyingPiece == null) {
+                tileRef[scanIndex].setAsViable(on);
+            }
+        }
+    }
 }

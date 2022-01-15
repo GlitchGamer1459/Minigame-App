@@ -37,7 +37,8 @@ public class ChessPanel extends JPanel implements MouseListener {
     private void init() {
         new Rook(new Coordinate(5,1), 0, tileRef, Piece.TEAM_BLACK);
         new Piece(new Coordinate(5, 5), 1, tileRef, Piece.TEAM_WHITE);
-        new Piece(new Coordinate(5, 4), 1, tileRef, Piece.TEAM_BLACK);
+        new Piece(new Coordinate(5, 4), 2, tileRef, Piece.TEAM_BLACK);
+        new Queen(new Coordinate(0, 0), 3, tileRef, Piece.TEAM_WHITE);
 
         drawPieces();
     }

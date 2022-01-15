@@ -7,6 +7,10 @@ import Application.chess.Movement;
 
 public class Queen extends Piece {
 
+    public Queen(Coordinate inCoords, int id, Tile[] tileRefIn, int team) {
+        super(inCoords, id, tileRefIn, team, Piece.TYPE_QUEEN);
+    }
+
     @Override
     public boolean constraints(Coordinate moveTo, Coordinate origin) {
         return Movement.canMoveUpLeftFar(moveTo, origin) ||
@@ -18,7 +22,12 @@ public class Queen extends Piece {
                 Movement.canMoveDownStraightFar(moveTo, origin);
     }
 
-    public Queen(Coordinate inCoords, int id, Tile[] tileRefIn, int team) {
-        super(inCoords, id, tileRefIn, team, Piece.TYPE_QUEEN);
+    @Override
+    public void highlightAllViableMoves(boolean on) {
+        Movement.highlightUpFar(tileRef, on, this);
+        Movement.highlightDownFar(tileRef, on, this);
+        Movement.highlightStraightRightFar(tileRef, on, this);
+        Movement.highlightStraightLeftFar(tileRef, on, this);
+        Movement.highlightUpLeftFar(tileRef, on, this);
     }
 }

@@ -2,12 +2,17 @@ package Application.chess;
 
 public final class Movement {
 
+    private Movement() {
+
+    }
+
     // static constraint methods to apply to pieces in overridden constraint method:
 
     public static boolean canMoveUpLeftFar(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
         int origIndex = Coordinate.getIndexFromCoordinate(origin);
 
+        /*
         return toIndex == origIndex - 9 ||
                 toIndex == origIndex - 18 ||
                 toIndex == origIndex - 27 ||
@@ -15,6 +20,8 @@ public final class Movement {
                 toIndex == origIndex - 45 ||
                 toIndex == origIndex - 54 ||
                 toIndex == origIndex - 63;
+        */
+        return false;
     }
 
     public static boolean canMoveUpRightFar(Coordinate moveTo, Coordinate origin) {

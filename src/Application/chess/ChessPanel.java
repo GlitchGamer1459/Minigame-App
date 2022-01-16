@@ -1,7 +1,5 @@
 package Application.chess;
 
-import Application.chess.pieces.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -9,13 +7,12 @@ import java.awt.event.MouseListener;
 
 public class ChessPanel extends JPanel implements MouseListener {
 
-    public Tile[] tileRef = new Tile[64];
+    public Tile[][] tileRef = new Tile[8][8];
 
-    private int saved = 0;
+    private int buildingRow = 0;
     private boolean didFirstClick = false;
     private Piece pieceToMove;
-    private int fromIndex;
-
+    private Coordinate fromCoord;
 
     public ChessPanel() {
         setLayout(new GridLayout(8,8));
@@ -23,8 +20,10 @@ public class ChessPanel extends JPanel implements MouseListener {
 
         setTileReference();
 
-        for (Tile tile : tileRef) {
-            add(tile);
+        for (Tile[] row : tileRef) {
+            for (Tile tile : row) {
+                add(tile);
+            }
         }
 
         addMouseListener(this);
@@ -35,10 +34,7 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     private void init() {
-        new Rook(new Coordinate(5,1), 0, tileRef, Piece.TEAM_BLACK);
-        new Piece(new Coordinate(5, 5), 1, tileRef, Piece.TEAM_WHITE);
-        new Piece(new Coordinate(5, 4), 2, tileRef, Piece.TEAM_BLACK);
-        new Queen(new Coordinate(0, 0), 3, tileRef, Piece.TEAM_WHITE);
+        new Piece(new Coordinate(3,3), 0, tileRef, Piece.TEAM_BLACK);
 
         drawPieces();
     }
@@ -58,7 +54,6 @@ public class ChessPanel extends JPanel implements MouseListener {
         boolean printBlack;
         Color colorToPrint;
         Color textColor;
-        int cap = saved + 8;
 
         if (startBlack) {
             printBlack = true;
@@ -70,8 +65,8 @@ public class ChessPanel extends JPanel implements MouseListener {
             textColor = Color.BLACK;
         }
 
-        for (int i = saved; i < cap; i++) {
-            tileRef[i] = new Tile(colorToPrint, textColor, i);
+        for (int i = 0; i < 8; i++) {
+            tileRef[buildingRow][i] = new Tile(colorToPrint, textColor, i);
 
             if (printBlack) {
                 colorToPrint = Color.WHITE;
@@ -82,19 +77,23 @@ public class ChessPanel extends JPanel implements MouseListener {
                 textColor = Color.WHITE;
                 printBlack = true;
             }
-
-            saved++;
         }
+
+        buildingRow++;
     }
 
     public void drawPieces() {
-        for (Tile tile : tileRef) {
-            tile.setText("");
+        for (Tile[] row : tileRef) {
+            for (Tile tile : row) {
+                tile.setText("");
+            }
         }
 
-        for (Tile tile : tileRef) {
-            if (tile.occupyingPiece != null) {
-                tile.setText(tile.occupyingPiece.type + tile.occupyingPiece.team);
+        for (Tile[] row : tileRef) {
+            for (Tile tile : row) {
+                if (tile.occupyingPiece != null) {
+                    tile.setText(tile.occupyingPiece.type + tile.occupyingPiece.team);
+                }
             }
         }
     }
@@ -102,28 +101,23 @@ public class ChessPanel extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (!didFirstClick) {
-            int fromX = (int)(e.getX() / tileRef[0].getWidth()); // tileRef[0] is a stand in for an example tile
-            int fromY = (int)(e.getY() / tileRef[0].getHeight());
-            fromIndex = Coordinate.getIndexFromCoordinate(new Coordinate(fromX, fromY));
+            fromCoord = new Coordinate((int)(e.getX() / tileRef[0][0].getWidth()), (int)(e.getY() / tileRef[0][0].getHeight()));
 
-            if (tileRef[fromIndex].occupyingPiece != null) {
-                pieceToMove = tileRef[fromIndex].occupyingPiece;
+            if (tileRef[fromCoord.y][fromCoord.x].occupyingPiece != null) {
+                pieceToMove = tileRef[fromCoord.y][fromCoord.x].occupyingPiece;
                 didFirstClick = true;
 
-                tileRef[fromIndex].setAsSelected(true);
-                tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(true);
+                tileRef[fromCoord.y][fromCoord.x].setAsSelected(true);
+                tileRef[fromCoord.y][fromCoord.x].occupyingPiece.highlightAllViableMoves(true);
             }
         } else {
-            int toX = (int)(e.getX() / tileRef[0].getWidth());
-            int toY = (int)(e.getY() / tileRef[0].getHeight());
+            tileRef[fromCoord.y][fromCoord.x].occupyingPiece.highlightAllViableMoves(false);
 
-            tileRef[fromIndex].occupyingPiece.highlightAllViableMoves(false);
-
-            pieceToMove.move(new Coordinate(toX, toY));
+            pieceToMove.move(new Coordinate((int)(e.getX() / tileRef[0][0].getWidth()), (int)(e.getY() / tileRef[0][0].getHeight())));
 
             didFirstClick = false;
 
-            tileRef[fromIndex].setAsSelected(false);
+            tileRef[fromCoord.y][fromCoord.x].setAsSelected(false);
         }
 
         drawPieces();

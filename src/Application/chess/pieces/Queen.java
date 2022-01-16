@@ -7,7 +7,7 @@ import Application.chess.Movement;
 
 public class Queen extends Piece {
 
-    public Queen(Coordinate inCoords, int id, Tile[] tileRefIn, int team) {
+    public Queen(Coordinate inCoords, int id, Tile[][] tileRefIn, int team) {
         super(inCoords, id, tileRefIn, team, Piece.TYPE_QUEEN);
     }
 
@@ -24,10 +24,5 @@ public class Queen extends Piece {
 
     @Override
     public void highlightAllViableMoves(boolean on) {
-        Movement.highlightUpFar(tileRef, on, this);
-        Movement.highlightDownFar(tileRef, on, this);
-        Movement.highlightStraightRightFar(tileRef, on, this);
-        Movement.highlightStraightLeftFar(tileRef, on, this);
-        Movement.highlightUpLeftFar(tileRef, on, this);
     }
 }

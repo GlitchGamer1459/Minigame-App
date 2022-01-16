@@ -7,7 +7,7 @@ import Application.chess.Tile;
 
 public class Rook extends Piece {
 
-    public Rook(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
+    public Rook(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn) {
         super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_ROOK);
     }
 
@@ -20,9 +20,6 @@ public class Rook extends Piece {
 
     @Override
     public void highlightAllViableMoves(boolean on) {
-        Movement.highlightUpFar(tileRef, on, this);
-        Movement.highlightDownFar(tileRef, on, this);
-        Movement.highlightStraightRightFar(tileRef, on, this);
-        Movement.highlightStraightLeftFar(tileRef, on, this);
+
     }
 }

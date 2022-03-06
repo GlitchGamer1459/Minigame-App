@@ -15,7 +15,7 @@ public class Bishop extends Piece {
                 Movement.canMoveDownLeftFar(moveTo, origin);
     }
 
-    public Bishop(Coordinate inCoords, int id, Tile[] tileRefIn, int teamIn) {
+    public Bishop(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn) {
         super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_BISHOP);
     }
 }

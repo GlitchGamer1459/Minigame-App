@@ -7,6 +7,21 @@ public final class Movement {
     }
 
     // static constraint methods to apply to pieces in overridden constraint method:
+    
+    /*
+    public static boolean canMoveUpLeftFar(Coordinate moveTo, Coordinate origin) {
+        int y = origin.y;
+        
+        for (int x = origin.x; x > 0; x--) {
+            y--;
+            if (moveTo.x == x && moveTo.y == y) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    */
 
     public static boolean canMoveUpLeftFar(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);

@@ -1,111 +1,94 @@
 package Application.chess;
 
-/*
-TODO upleftfar, uprightfar, downleftfar, downrightfar
- */
-
 public final class Movement {
 
-    private Movement() {
-
-    }
+    // private constructor to prevent instantiation of class
+    private Movement() {}
 
     // static constraint methods to apply to pieces in overridden constraint method:
-    
-    /*
+
     public static boolean canMoveUpLeftFar(Coordinate moveTo, Coordinate origin) {
         int y = origin.y;
         
-        for (int x = origin.x; x > 0; x--) {
-            y--;
+        for (int x = origin.x; x >= 0; x--) {
+            if (y == 0) {
+                return false;
+            }
             if (moveTo.x == x && moveTo.y == y) {
                 return true;
             }
+            y--;
         }
         
         return false;
     }
-    */
 
-    public static boolean canMoveUpLeftFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+    public static boolean canMoveUpRightFar(Coordinate moveTo, Coordinate origin) {
+        int y = origin.y;
 
-        /*
-        return toIndex == origIndex - 9 ||
-                toIndex == origIndex - 18 ||
-                toIndex == origIndex - 27 ||
-                toIndex == origIndex - 36 ||
-                toIndex == origIndex - 45 ||
-                toIndex == origIndex - 54 ||
-                toIndex == origIndex - 63;
-        */
+        for (int x = origin.x; x < 8; x++) {
+            if (y == 0) {
+                return false;
+            }
+            if (moveTo.x == x && moveTo.y == y) {
+                return true;
+            }
+            y--;
+        }
+
         return false;
     }
 
-    public static boolean canMoveUpRightFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
-
-        return toIndex == origIndex - 7 ||
-                toIndex == origIndex - 14 ||
-                toIndex == origIndex - 21 ||
-                toIndex == origIndex - 28 ||
-                toIndex == origIndex - 35 ||
-                toIndex == origIndex - 42 ||
-                toIndex == origIndex - 49;
-    }
-
     public static boolean canMoveDownLeftFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+        int y = origin.y;
 
-        return toIndex == origIndex + 7 ||
-                toIndex == origIndex + 14 ||
-                toIndex == origIndex + 21 ||
-                toIndex == origIndex + 28 ||
-                toIndex == origIndex + 35 ||
-                toIndex == origIndex + 42 ||
-                toIndex == origIndex + 49;
+        for (int x = origin.x; x >= 0; x--) {
+            if (y == 8) {
+                return false;
+            }
+            if (moveTo.x == x && moveTo.y == y) {
+                return true;
+            }
+            y++;
+        }
+
+        return false;
     }
 
     public static boolean canMoveDownRightFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+        int y = origin.y;
 
-        return toIndex == origIndex + 9 ||
-                toIndex == origIndex + 18 ||
-                toIndex == origIndex + 27 ||
-                toIndex == origIndex + 36 ||
-                toIndex == origIndex + 45 ||
-                toIndex == origIndex + 54 ||
-                toIndex == origIndex + 63;
+        for (int x = origin.x; x < 8; x++) {
+            if (y == 8) {
+                return false;
+            }
+            if (moveTo.x == x && moveTo.y == y) {
+                return true;
+            }
+            y++;
+        }
+
+        return false;
     }
 
     public static boolean canMoveUpStraightFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+        for (int y = origin.y; y >= 0; y--) {
+            if (moveTo.y == y) {
+                return true;
+            }
+        }
 
-        return toIndex == origIndex - 8 ||
-                toIndex == origIndex - 16 ||
-                toIndex == origIndex - 24 ||
-                toIndex == origIndex - 32 ||
-                toIndex == origIndex - 40 ||
-                toIndex == origIndex - 48 ||
-                toIndex == origIndex - 56;
+        return false;
     }
 
     public static boolean canMoveDownStraightFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+        for (int y = origin.y; y < 8; y++) {
+            if (moveTo.y == y) {
+                return true;
+            }
+        }
 
-        return toIndex == origIndex + 8 ||
-                toIndex == origIndex + 16 ||
-                toIndex == origIndex + 24 ||
-                toIndex == origIndex + 32 ||
-                toIndex == origIndex + 40 ||
-                toIndex == origIndex + 48 ||
-                toIndex == origIndex + 56;
+        return false;
     }
 
     public static boolean canMoveLeftToRightStraightFar(Coordinate moveTo, Coordinate origin) {
@@ -265,7 +248,6 @@ public final class Movement {
         }
     }
 
-    @Deprecated
     public static void highlightUpLeftFar(Tile[] tileRef, boolean on, Piece piece) {
         int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
 

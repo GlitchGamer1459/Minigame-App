@@ -1,5 +1,6 @@
 package Application.chess;
 
+import Application.chess.pieces.Horse;
 import Application.chess.pieces.Queen;
 
 import javax.swing.*;
@@ -38,6 +39,7 @@ public class ChessPanel extends JPanel implements MouseListener {
     private void init() {
         new Piece(new Coordinate(3,3), 0, tileRef, Piece.TEAM_BLACK);
         new Queen(new Coordinate(5,5), 1, tileRef, Piece.TEAM_WHITE);
+        new Horse(new Coordinate(2,7), 1, tileRef, Piece.TEAM_BLACK);
 
         drawPieces();
     }

@@ -23,7 +23,7 @@ public class Piece implements PieceTemplate {
     // instance properties and methods:
 
     public Coordinate position;
-    public Tile[][] tileRef = new Tile[8][8];
+    public Tile[][] tileRef;
     public int ID;
     public int team;
 
@@ -47,7 +47,6 @@ public class Piece implements PieceTemplate {
         team = teamIn;
         type = typeIn;
 
-        int i = Coordinate.getIndexFromCoordinate(this.position);
         tileRef[position.y][position.x].occupyingPiece = this;
     }
 

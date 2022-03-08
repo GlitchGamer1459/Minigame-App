@@ -1,5 +1,9 @@
 package Application.chess;
 
+/*
+TODO upleftfar, uprightfar, downleftfar, downrightfar
+ */
+
 public final class Movement {
 
     private Movement() {

@@ -1,5 +1,7 @@
 package Application.chess;
 
+import Application.chess.pieces.Queen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -35,6 +37,7 @@ public class ChessPanel extends JPanel implements MouseListener {
 
     private void init() {
         new Piece(new Coordinate(3,3), 0, tileRef, Piece.TEAM_BLACK);
+        new Queen(new Coordinate(5,5), 1, tileRef, Piece.TEAM_WHITE);
 
         drawPieces();
     }

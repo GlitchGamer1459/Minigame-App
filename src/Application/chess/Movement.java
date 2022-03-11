@@ -194,44 +194,32 @@ public final class Movement {
 
     // static highlighting methods to apply to pieces in overridden highlightAllViableMoves method:
 
-    public static void highlightUpFar(Tile[] tileRef, boolean on, Piece piece){
-        int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
-        boolean running = true;
+    public static void highlightUpFar(Tile[][] tileRef, boolean on, Piece piece){
+        for (int y = piece.position.y - 1; y >= 0; y--) {
+            if (tileRef[y][piece.position.x].occupyingPiece == null) {
+                tileRef[y][piece.position.x].setAsViable(on);
+            } else if (tileRef[y][piece.position.x].occupyingPiece != null &&
+                    tileRef[y][piece.position.x].occupyingPiece.team != piece.team) {
+                tileRef[y][piece.position.x].setAsViable(on);
 
-        while (running) {
-            scanIndex -= 8;
-
-            if (scanIndex < 0) {
-                running = false;
-            } else if (tileRef[scanIndex].occupyingPiece == null) {
-                tileRef[scanIndex].setAsViable(on);
-            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team != piece.team) {
-                tileRef[scanIndex].setAsViable(on);
-
-                running = false;
+                break;
             } else {
-                running = false;
+                break;
             }
         }
     }
 
-    public static void highlightDownFar(Tile[] tileRef, boolean on, Piece piece) {
-        int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
-        boolean running = true;
+    public static void highlightDownFar(Tile[][] tileRef, boolean on, Piece piece) {
+        for (int y = piece.position.y + 1; y < 8; y++) {
+            if (tileRef[y][piece.position.x].occupyingPiece == null) {
+                tileRef[y][piece.position.x].setAsViable(on);
+            } else if (tileRef[y][piece.position.x].occupyingPiece != null &&
+                    tileRef[y][piece.position.x].occupyingPiece.team != piece.team) {
+                tileRef[y][piece.position.x].setAsViable(on);
 
-        while (running) {
-            scanIndex += 8;
-
-            if (scanIndex > 63) {
-                running = false;
-            } else if (tileRef[scanIndex].occupyingPiece == null) {
-                tileRef[scanIndex].setAsViable(on);
-            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team != piece.team) {
-                tileRef[scanIndex].setAsViable(on);
-
-                running = false;
-            } else if (tileRef[scanIndex].occupyingPiece != null && tileRef[scanIndex].occupyingPiece.team == piece.team) {
-                running = false;
+                break;
+            } else {
+                break;
             }
         }
     }

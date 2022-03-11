@@ -25,5 +25,7 @@ public class Queen extends Piece {
 
     @Override
     public void highlightAllViableMoves(boolean on) {
+        Movement.highlightUpFar(tileRef, on, this);
+        Movement.highlightDownFar(tileRef, on, this);
     }
 }

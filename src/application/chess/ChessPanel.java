@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/*
+ TODO: rewrite Movement.canMoveHorse() and Pawn.canMovePawn()
+ */
+
 public class ChessPanel extends JPanel implements MouseListener {
 
     public final Tile[][] tileRef = new Tile[8][8];

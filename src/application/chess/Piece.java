@@ -2,13 +2,9 @@ package application.chess;
 
 import application.chess.pieces.PieceTemplate;
 
-import java.util.ArrayList;
-
 public class Piece implements PieceTemplate {
 
     // static properties and methods:
-
-    public static final ArrayList<Piece> pieceRef = new ArrayList<>();
 
     public static final String TYPE_GENERIC = "piece";
     public static final String TYPE_QUEEN = "queen";
@@ -34,8 +30,6 @@ public class Piece implements PieceTemplate {
         team = teamIn;
 
         tileRef[position.y][position.x].occupyingPiece = this;
-
-        pieceRef.add(this);
     }
 
     public Piece(Coordinate inCoords, Tile[][] tileRefIn, int teamIn, String typeIn) {

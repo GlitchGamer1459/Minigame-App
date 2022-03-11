@@ -12,7 +12,7 @@ public class Horse extends Piece {
         return Movement.canMoveHorse(moveTo, origin);
     }
 
-    public Horse(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn) {
-        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_HORSE);
+    public Horse(Coordinate inCoords, Tile[][] tileRefIn, int teamIn) {
+        super(inCoords, tileRefIn, teamIn, Piece.TYPE_HORSE);
     }
 }

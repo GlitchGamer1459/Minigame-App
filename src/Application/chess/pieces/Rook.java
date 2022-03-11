@@ -7,8 +7,8 @@ import Application.chess.Tile;
 
 public class Rook extends Piece {
 
-    public Rook(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn) {
-        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_ROOK);
+    public Rook(Coordinate inCoords, Tile[][] tileRefIn, int teamIn) {
+        super(inCoords, tileRefIn, teamIn, Piece.TYPE_ROOK);
     }
 
     @Override

@@ -24,15 +24,13 @@ public class Piece implements PieceTemplate {
 
     public Coordinate position;
     public Tile[][] tileRef;
-    public int ID;
     public int team;
 
     protected String type = TYPE_GENERIC;
 
-    public Piece(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn) {
+    public Piece(Coordinate inCoords, Tile[][] tileRefIn, int teamIn) {
         position = new Coordinate(inCoords.x, inCoords.y);
         tileRef = tileRefIn;
-        ID = id;
         team = teamIn;
 
         tileRef[position.y][position.x].occupyingPiece = this;
@@ -40,10 +38,9 @@ public class Piece implements PieceTemplate {
         pieceRef.add(this);
     }
 
-    public Piece(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn, String typeIn) {
+    public Piece(Coordinate inCoords, Tile[][] tileRefIn, int teamIn, String typeIn) {
         position = new Coordinate(inCoords.x, inCoords.y);
         tileRef = tileRefIn;
-        ID = id;
         team = teamIn;
         type = typeIn;
 

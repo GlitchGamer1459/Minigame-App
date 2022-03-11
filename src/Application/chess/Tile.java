@@ -5,11 +5,10 @@ import java.awt.*;
 
 public class Tile extends JLabel {
 
-    public int id;
     public Piece occupyingPiece = null;
     private final Color background;
 
-    public Tile(Color backgroundIn, Color text, int idIn) {
+    public Tile(Color backgroundIn, Color text) {
         this.setOpaque(true);
 
         background = backgroundIn;
@@ -17,8 +16,6 @@ public class Tile extends JLabel {
 
         this.setForeground(text);
         this.setVisible(true);
-
-        id = idIn;
     }
 
     public void setAsSelected(boolean isActive) {

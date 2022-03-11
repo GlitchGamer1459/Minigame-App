@@ -39,12 +39,12 @@ public class ChessPanel extends JPanel implements MouseListener {
     }
 
     private void init() {
-        new Piece(new Coordinate(3,3), 0, tileRef, Piece.TEAM_BLACK);
-        new Queen(new Coordinate(5,5), 1, tileRef, Piece.TEAM_WHITE);
-        new Horse(new Coordinate(2,7), 1, tileRef, Piece.TEAM_BLACK);
-        new Queen(new Coordinate(1,2), 1, tileRef, Piece.TEAM_WHITE);
-        new Rook(new Coordinate(3,6), 1, tileRef, Piece.TEAM_WHITE);
-        new Bishop(new Coordinate(5,6), 1, tileRef, Piece.TEAM_BLACK);
+        new Piece(new Coordinate(3,3), tileRef, Piece.TEAM_BLACK);
+        new Queen(new Coordinate(5,5), tileRef, Piece.TEAM_WHITE);
+        new Horse(new Coordinate(2,7), tileRef, Piece.TEAM_BLACK);
+        new Queen(new Coordinate(1,2), tileRef, Piece.TEAM_WHITE);
+        new Rook(new Coordinate(3,6), tileRef, Piece.TEAM_WHITE);
+        new Bishop(new Coordinate(5,6), tileRef, Piece.TEAM_BLACK);
 
         drawPieces();
     }
@@ -76,7 +76,7 @@ public class ChessPanel extends JPanel implements MouseListener {
         }
 
         for (int i = 0; i < 8; i++) {
-            tileRef[buildingRow][i] = new Tile(colorToPrint, textColor, i);
+            tileRef[buildingRow][i] = new Tile(colorToPrint, textColor);
 
             if (printBlack) {
                 colorToPrint = Color.WHITE;

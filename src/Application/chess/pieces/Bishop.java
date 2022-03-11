@@ -7,8 +7,8 @@ import Application.chess.Tile;
 
 public class Bishop extends Piece {
 
-    public Bishop(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn) {
-        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_BISHOP);
+    public Bishop(Coordinate inCoords, Tile[][] tileRefIn, int teamIn) {
+        super(inCoords, tileRefIn, teamIn, Piece.TYPE_BISHOP);
     }
 
     @Override

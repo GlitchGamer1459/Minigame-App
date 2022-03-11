@@ -7,8 +7,8 @@ import Application.chess.Movement;
 
 public class Queen extends Piece {
 
-    public Queen(Coordinate inCoords, int id, Tile[][] tileRefIn, int team) {
-        super(inCoords, id, tileRefIn, team, Piece.TYPE_QUEEN);
+    public Queen(Coordinate inCoords, Tile[][] tileRefIn, int team) {
+        super(inCoords, tileRefIn, team, Piece.TYPE_QUEEN);
     }
 
     @Override

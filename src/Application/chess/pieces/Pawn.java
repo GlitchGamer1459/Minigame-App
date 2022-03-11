@@ -9,8 +9,8 @@ public class Pawn extends Piece {
     private boolean didFirstMove = false;
     private final boolean isFacingNorth;
 
-    public Pawn(Coordinate inCoords, int id, Tile[][] tileRefIn, int teamIn, boolean IsFacingNorth) {
-        super(inCoords, id, tileRefIn, teamIn, Piece.TYPE_PAWN);
+    public Pawn(Coordinate inCoords, Tile[][] tileRefIn, int teamIn, boolean IsFacingNorth) {
+        super(inCoords, tileRefIn, teamIn, Piece.TYPE_PAWN);
         isFacingNorth = IsFacingNorth;
     }
 

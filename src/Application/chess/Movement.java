@@ -73,7 +73,7 @@ public final class Movement {
 
     public static boolean canMoveUpStraightFar(Coordinate moveTo, Coordinate origin) {
         for (int y = origin.y; y >= 0; y--) {
-            if (moveTo.y == y) {
+            if (moveTo.y == y && moveTo.x == origin.x) {
                 return true;
             }
         }
@@ -83,7 +83,7 @@ public final class Movement {
 
     public static boolean canMoveDownStraightFar(Coordinate moveTo, Coordinate origin) {
         for (int y = origin.y; y < 8; y++) {
-            if (moveTo.y == y) {
+            if (moveTo.y == y && moveTo.x == origin.x) {
                 return true;
             }
         }
@@ -91,6 +91,27 @@ public final class Movement {
         return false;
     }
 
+    public static boolean canMoveLeftStraightFar(Coordinate moveTo, Coordinate origin) {
+        for (int x = origin.x; x >= 0; x--) {
+            if (moveTo.x == x && moveTo.y == origin.y) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean canMoveRightStraightFar(Coordinate moveTo, Coordinate origin) {
+        for (int x = origin.x; x < 8; x++) {
+            if (moveTo.x == x && moveTo.y == origin.y) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Deprecated // idk if im going to remove it yet but ive left it here for posterity ig
     public static boolean canMoveLeftToRightStraightFar(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
         int origIndex = Coordinate.getIndexFromCoordinate(origin);
@@ -156,6 +177,7 @@ public final class Movement {
         };
     }
 
+    // TODO: needs to be rewritten to avoid portalling
     public static boolean canMoveHorse(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
         int origIndex = Coordinate.getIndexFromCoordinate(origin);

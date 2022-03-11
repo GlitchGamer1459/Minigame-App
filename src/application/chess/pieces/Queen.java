@@ -1,9 +1,9 @@
-package Application.chess.pieces;
+package application.chess.pieces;
 
-import Application.chess.Coordinate;
-import Application.chess.Piece;
-import Application.chess.Tile;
-import Application.chess.Movement;
+import application.chess.Coordinate;
+import application.chess.Piece;
+import application.chess.Tile;
+import application.chess.Movement;
 
 public class Queen extends Piece {
 

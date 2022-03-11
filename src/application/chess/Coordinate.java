@@ -1,4 +1,4 @@
-package Application.chess;
+package application.chess;
 
 public class Coordinate {
 
@@ -8,14 +8,10 @@ public class Coordinate {
         return (8 * input.y) + input.x;
     }
 
-    public static Coordinate getCoordinateFromIndex(int position) {
-        return new Coordinate(position % 8, (int)(position / 8.0f));
-    }
-
     // instance properties and methods:
 
-    public int x;
-    public int y;
+    public final int x;
+    public final int y;
 
     public Coordinate(int X, int Y) {
         x = X;

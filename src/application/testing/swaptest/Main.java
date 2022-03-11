@@ -1,6 +1,6 @@
-package Application.testing.swaptest;
+package application.testing.swaptest;
 
-import Application.testing.swaptest.screens.MenuPanel;
+import application.testing.swaptest.screens.MenuPanel;
 
 public class Main {
 

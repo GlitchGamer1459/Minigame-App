@@ -1,9 +1,6 @@
-package Application.chess;
+package application.chess;
 
-import Application.chess.pieces.Bishop;
-import Application.chess.pieces.Horse;
-import Application.chess.pieces.Queen;
-import Application.chess.pieces.Rook;
+import application.chess.pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class ChessPanel extends JPanel implements MouseListener {
 
-    public Tile[][] tileRef = new Tile[8][8];
+    public final Tile[][] tileRef = new Tile[8][8];
 
     private int buildingRow = 0;
     private boolean didFirstClick = false;
@@ -45,6 +42,7 @@ public class ChessPanel extends JPanel implements MouseListener {
         new Queen(new Coordinate(1,2), tileRef, Piece.TEAM_WHITE);
         new Rook(new Coordinate(3,6), tileRef, Piece.TEAM_WHITE);
         new Bishop(new Coordinate(5,6), tileRef, Piece.TEAM_BLACK);
+        new Pawn(new Coordinate(0,6), tileRef, Piece.TEAM_BLACK, true);
 
         drawPieces();
     }
@@ -108,6 +106,7 @@ public class ChessPanel extends JPanel implements MouseListener {
         }
     }
 
+    @SuppressWarnings("RedundantCast")
     @Override
     public void mousePressed(MouseEvent e) {
         if (!didFirstClick) {

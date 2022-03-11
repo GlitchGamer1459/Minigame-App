@@ -1,4 +1,4 @@
-package Application.chess;
+package application.chess;
 
 import javax.swing.*;
 import java.awt.*;

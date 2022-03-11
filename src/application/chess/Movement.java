@@ -1,4 +1,4 @@
-package Application.chess;
+package application.chess;
 
 public final class Movement {
 

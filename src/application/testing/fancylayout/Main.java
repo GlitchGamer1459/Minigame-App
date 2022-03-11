@@ -1,4 +1,4 @@
-package Application.testing.fancylayout;
+package application.testing.fancylayout;
 
 public class Main {
 

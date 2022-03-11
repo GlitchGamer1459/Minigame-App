@@ -1,6 +1,6 @@
-package Application.control;
+package application.control;
 
-import Application.chess.ChessPanel;
+import application.chess.ChessPanel;
 
 public class Main {
 

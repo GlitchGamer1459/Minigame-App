@@ -1,6 +1,6 @@
-package Application.testing.swaptest.screens;
+package application.testing.swaptest.screens;
 
-import Application.testing.swaptest.Main;
+import application.testing.swaptest.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel implements ActionListener {
 
-    JLabel title;
-    JButton pg1Button;
-    JButton pg2Button;
+    final JLabel title;
+    final JButton pg1Button;
+    final JButton pg2Button;
 
     public MenuPanel() {
 

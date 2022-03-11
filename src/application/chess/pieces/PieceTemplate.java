@@ -1,7 +1,8 @@
-package Application.chess.pieces;
+package application.chess.pieces;
 
-import Application.chess.Coordinate;
+import application.chess.Coordinate;
 
+@SuppressWarnings("unused")
 public interface PieceTemplate {
 
     boolean constraints(Coordinate moveTo, Coordinate position);

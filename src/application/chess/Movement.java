@@ -111,19 +111,59 @@ public final class Movement {
         return false;
     }
 
-    // TODO: needs to be rewritten to avoid portalling
     public static boolean canMoveHorse(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
+        int x = origin.x;
+        int y = origin.y;
 
-        return toIndex == origIndex - 6 ||
-                toIndex == origIndex - 10 ||
-                toIndex == origIndex - 15 ||
-                toIndex == origIndex - 17 ||
-                toIndex == origIndex + 6 ||
-                toIndex == origIndex + 10 ||
-                toIndex == origIndex + 15 ||
-                toIndex == origIndex + 17;
+        // check high top left
+        x--;
+        y -= 2;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check high top right
+        x += 2;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check low top right
+        x++;
+        y++;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check high bottom right
+        y += 2;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check low bottom right
+        x--;
+        y++;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check low bottom left
+        x -= 2;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check high bottom left
+        x--;
+        y--;
+        if (moveTo.x == x && moveTo.y == y) {
+            return true;
+        }
+
+        // check low top left
+        y -= 2;
+        return moveTo.x == x && moveTo.y == y;
     }
 
     // static highlighting methods to apply to pieces in overridden highlightAllViableMoves method:
@@ -274,5 +314,9 @@ public final class Movement {
 
             y++;
         }
+    }
+
+    public static void highlightHorse(Tile[][] tileRef, boolean on, Piece piece) {
+
     }
 }

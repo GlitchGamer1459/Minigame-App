@@ -6,47 +6,17 @@ import application.chess.Tile;
 
 public class Pawn extends Piece {
 
-    private boolean didFirstMove = false;
-    private final boolean isFacingNorth;
-
     public Pawn(Coordinate inCoords, Tile[][] tileRefIn, int teamIn, boolean IsFacingNorth) {
         super(inCoords, tileRefIn, teamIn, Piece.TYPE_PAWN);
-        isFacingNorth = IsFacingNorth;
     }
 
+    @SuppressWarnings("unused")
     private boolean canMovePawn(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
-
-        if (isFacingNorth) {
-            if (!didFirstMove) {
-                didFirstMove = true;
-
-                return toIndex == origIndex - 8 ||
-                          toIndex == origIndex - 16;
-            } else {
-                return toIndex == origIndex - 8;
-            }
-        } else {
-            if (!didFirstMove) {
-                didFirstMove = true;
-
-                return toIndex == origIndex + 8 ||
-                        toIndex == origIndex + 16;
-            } else {
-                return toIndex == origIndex + 8;
-            }
-        }
+        return true;
     }
 
     @Override
     public boolean constraints(Coordinate moveTo, Coordinate origin) {
-        boolean output = canMovePawn(moveTo, origin);
-
-        if (!output) {
-            didFirstMove = false;
-        }
-
-        return output;
+        return canMovePawn(moveTo, origin);
     }
 }

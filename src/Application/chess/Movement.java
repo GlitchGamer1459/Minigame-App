@@ -111,72 +111,6 @@ public final class Movement {
         return false;
     }
 
-    @Deprecated // idk if im going to remove it yet but ive left it here for posterity ig
-    public static boolean canMoveLeftToRightStraightFar(Coordinate moveTo, Coordinate origin) {
-        int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
-        int origIndex = Coordinate.getIndexFromCoordinate(origin);
-
-        return switch (origin.x) {
-            case 0 -> toIndex == origIndex + 1 ||
-                    toIndex == origIndex + 2 ||
-                    toIndex == origIndex + 3 ||
-                    toIndex == origIndex + 4 ||
-                    toIndex == origIndex + 5 ||
-                    toIndex == origIndex + 6 ||
-                    toIndex == origIndex + 7;
-            case 1 -> toIndex == origIndex - 1 ||
-                    toIndex == origIndex + 1 ||
-                    toIndex == origIndex + 2 ||
-                    toIndex == origIndex + 3 ||
-                    toIndex == origIndex + 4 ||
-                    toIndex == origIndex + 5 ||
-                    toIndex == origIndex + 6;
-            case 2 -> toIndex == origIndex - 2 ||
-                    toIndex == origIndex - 1 ||
-                    toIndex == origIndex + 1 ||
-                    toIndex == origIndex + 2 ||
-                    toIndex == origIndex + 3 ||
-                    toIndex == origIndex + 4 ||
-                    toIndex == origIndex + 5;
-            case 3 -> toIndex == origIndex - 3 ||
-                    toIndex == origIndex - 2 ||
-                    toIndex == origIndex - 1 ||
-                    toIndex == origIndex + 1 ||
-                    toIndex == origIndex + 2 ||
-                    toIndex == origIndex + 3 ||
-                    toIndex == origIndex + 4;
-            case 4 -> toIndex == origIndex - 4 ||
-                    toIndex == origIndex - 3 ||
-                    toIndex == origIndex - 2 ||
-                    toIndex == origIndex - 1 ||
-                    toIndex == origIndex + 1 ||
-                    toIndex == origIndex + 2 ||
-                    toIndex == origIndex + 3;
-            case 5 -> toIndex == origIndex - 5 ||
-                    toIndex == origIndex - 4 ||
-                    toIndex == origIndex - 3 ||
-                    toIndex == origIndex - 2 ||
-                    toIndex == origIndex - 1 ||
-                    toIndex == origIndex + 1 ||
-                    toIndex == origIndex + 2;
-            case 6 -> toIndex == origIndex - 6 ||
-                    toIndex == origIndex - 5 ||
-                    toIndex == origIndex - 4 ||
-                    toIndex == origIndex - 3 ||
-                    toIndex == origIndex - 2 ||
-                    toIndex == origIndex - 1 ||
-                    toIndex == origIndex + 1;
-            case 7 -> toIndex == origIndex - 7 ||
-                    toIndex == origIndex - 6 ||
-                    toIndex == origIndex - 5 ||
-                    toIndex == origIndex - 4 ||
-                    toIndex == origIndex - 3 ||
-                    toIndex == origIndex - 2 ||
-                    toIndex == origIndex - 1;
-            default -> false;
-        };
-    }
-
     // TODO: needs to be rewritten to avoid portalling
     public static boolean canMoveHorse(Coordinate moveTo, Coordinate origin) {
         int toIndex = Coordinate.getIndexFromCoordinate(moveTo);
@@ -257,7 +191,7 @@ public final class Movement {
     public static void highlightUpLeftFar(Tile[][] tileRef, boolean on, Piece piece) {
         int y = piece.position.y - 1;
 
-        for (int x = piece.position.x - 1; x >=0; x--) {
+        for (int x = piece.position.x - 1; x >= 0; x--) {
             if (y < 0) {
                 break;
             }
@@ -273,6 +207,72 @@ public final class Movement {
             }
 
             y--;
+        }
+    }
+
+    public static void highlightUpRightFar(Tile[][] tileRef, boolean on, Piece piece) {
+        int y = piece.position.y - 1;
+
+        for (int x = piece.position.x + 1; x < 8; x++) {
+            if (y < 0) {
+                break;
+            }
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+
+                break;
+            } else {
+                break;
+            }
+
+            y--;
+        }
+    }
+
+    public static void highlightDownLeftFar(Tile[][] tileRef, boolean on, Piece piece) {
+        int y = piece.position.y + 1;
+
+        for (int x = piece.position.x - 1; x >= 0; x--) {
+            if (y == 8) {
+                break;
+            }
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+
+                break;
+            } else {
+                break;
+            }
+
+            y++;
+        }
+    }
+
+    public static void highlightDownRightFar(Tile[][] tileRef, boolean on, Piece piece) {
+        int y = piece.position.y + 1;
+
+        for (int x = piece.position.x + 1; x < 8; x++) {
+            if (y == 8) {
+                break;
+            }
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+
+                break;
+            } else {
+                break;
+            }
+
+            y++;
         }
     }
 }

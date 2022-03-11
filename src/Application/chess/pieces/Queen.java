@@ -30,5 +30,8 @@ public class Queen extends Piece {
         Movement.highlightStraightRightFar(tileRef, on, this);
         Movement.highlightStraightLeftFar(tileRef, on, this);
         Movement.highlightUpLeftFar(tileRef, on, this);
+        Movement.highlightUpRightFar(tileRef, on, this);
+        Movement.highlightDownLeftFar(tileRef, on, this);
+        Movement.highlightDownRightFar(tileRef, on, this);
     }
 }

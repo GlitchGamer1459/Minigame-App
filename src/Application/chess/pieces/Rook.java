@@ -13,13 +13,17 @@ public class Rook extends Piece {
 
     @Override
     public boolean constraints(Coordinate moveTo, Coordinate origin) {
-        return Movement.canMoveLeftToRightStraightFar(moveTo, origin) ||
+        return Movement.canMoveLeftStraightFar(moveTo, origin) ||
+                Movement.canMoveRightStraightFar(moveTo, origin) ||
                 Movement.canMoveUpStraightFar(moveTo, origin) ||
                 Movement.canMoveDownStraightFar(moveTo, origin);
     }
 
     @Override
     public void highlightAllViableMoves(boolean on) {
-
+        Movement.highlightUpFar(tileRef, on, this);
+        Movement.highlightDownFar(tileRef, on, this);
+        Movement.highlightStraightRightFar(tileRef, on, this);
+        Movement.highlightStraightLeftFar(tileRef, on, this);
     }
 }

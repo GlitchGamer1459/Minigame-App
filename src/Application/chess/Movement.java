@@ -11,7 +11,7 @@ public final class Movement {
         int y = origin.y;
         
         for (int x = origin.x; x >= 0; x--) {
-            if (y == 0) {
+            if (y < 0) {
                 return false;
             }
             if (moveTo.x == x && moveTo.y == y) {
@@ -27,7 +27,7 @@ public final class Movement {
         int y = origin.y;
 
         for (int x = origin.x; x < 8; x++) {
-            if (y == 0) {
+            if (y < 0) {
                 return false;
             }
             if (moveTo.x == x && moveTo.y == y) {
@@ -224,52 +224,55 @@ public final class Movement {
         }
     }
 
-    public static void highlightStraightRightFar(Tile[] tileRef, boolean on, Piece piece) {
-        int posIndex = Coordinate.getIndexFromCoordinate(piece.position);
-        int limiter = posIndex + (7 - piece.position.x);
+    public static void highlightStraightRightFar(Tile[][] tileRef, boolean on, Piece piece) {
+        for (int x = piece.position.x + 1; x < 8; x++) {
+            if (tileRef[piece.position.y][x].occupyingPiece == null) {
+                tileRef[piece.position.y][x].setAsViable(on);
+            } else if (tileRef[piece.position.y][x].occupyingPiece != null &&
+                    tileRef[piece.position.y][x].occupyingPiece.team != piece.team) {
+                tileRef[piece.position.y][x].setAsViable(on);
 
-        for (int i = posIndex + 1; i < limiter + 1; i++) {
-            if (tileRef[i].occupyingPiece == null) {
-                tileRef[i].setAsViable(on);
-            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team != piece.team) {
-                tileRef[i].setAsViable(on);
                 break;
-            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team == piece.team) {
-                break;
-            }
-        }
-    }
-
-    public static void highlightStraightLeftFar(Tile[] tileRef, boolean on, Piece piece) {
-        // highlight to the left of piece
-        int posIndex = Coordinate.getIndexFromCoordinate(piece.position);
-
-        int limiter = posIndex - piece.position.x;
-
-        for (int i = posIndex - 1; i > limiter - 1; i--) {
-            if (tileRef[i].occupyingPiece == null) {
-                tileRef[i].setAsViable(on);
-            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team != piece.team) {
-                tileRef[i].setAsViable(on);
-                break;
-            } else if (tileRef[i].occupyingPiece != null && tileRef[i].occupyingPiece.team == piece.team) {
+            } else {
                 break;
             }
         }
     }
 
-    public static void highlightUpLeftFar(Tile[] tileRef, boolean on, Piece piece) {
-        int scanIndex = Coordinate.getIndexFromCoordinate(piece.position);
+    public static void highlightStraightLeftFar(Tile[][] tileRef, boolean on, Piece piece) {
+        for (int x = piece.position.x - 1; x >= 0; x--) {
+            if (tileRef[piece.position.y][x].occupyingPiece == null) {
+                tileRef[piece.position.y][x].setAsViable(on);
+            } else if (tileRef[piece.position.y][x].occupyingPiece != null &&
+                    tileRef[piece.position.y][x].occupyingPiece.team != piece.team) {
+                tileRef[piece.position.y][x].setAsViable(on);
 
-        while (true) {
-            scanIndex -= 9;
-
-            if (scanIndex < 0) {
+                break;
+            } else {
                 break;
             }
-            if (tileRef[scanIndex].occupyingPiece == null) {
-                tileRef[scanIndex].setAsViable(on);
+        }
+    }
+
+    public static void highlightUpLeftFar(Tile[][] tileRef, boolean on, Piece piece) {
+        int y = piece.position.y - 1;
+
+        for (int x = piece.position.x - 1; x >=0; x--) {
+            if (y < 0) {
+                break;
             }
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+
+                break;
+            } else {
+                break;
+            }
+
+            y--;
         }
     }
 }

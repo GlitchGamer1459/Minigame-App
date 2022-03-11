@@ -27,5 +27,8 @@ public class Queen extends Piece {
     public void highlightAllViableMoves(boolean on) {
         Movement.highlightUpFar(tileRef, on, this);
         Movement.highlightDownFar(tileRef, on, this);
+        Movement.highlightStraightRightFar(tileRef, on, this);
+        Movement.highlightStraightLeftFar(tileRef, on, this);
+        Movement.highlightUpLeftFar(tileRef, on, this);
     }
 }

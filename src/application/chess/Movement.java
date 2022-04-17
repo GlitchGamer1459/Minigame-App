@@ -317,6 +317,99 @@ public final class Movement {
     }
 
     public static void highlightHorse(Tile[][] tileRef, boolean on, Piece piece) {
+        int x = piece.position.x;
+        int y = piece.position.y;
 
+        // check high top left
+        x--;
+        y -= 2;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check high top right
+        x += 2;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check low top right
+        x++;
+        y++;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check high bottom right
+        y += 2;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check low bottom right
+        x--;
+        y++;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check low bottom left
+        x -= 2;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check high bottom left
+        x--;
+        y--;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
+
+        // check low top left
+        y -= 2;
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            if (tileRef[y][x].occupyingPiece == null) {
+                tileRef[y][x].setAsViable(on);
+            } else if (tileRef[y][x].occupyingPiece != null &&
+                    tileRef[y][x].occupyingPiece.team != piece.team) {
+                tileRef[y][x].setAsViable(on);
+            }
+        }
     }
 }

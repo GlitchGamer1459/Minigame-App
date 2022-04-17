@@ -18,6 +18,6 @@ public class Horse extends Piece {
 
     @Override
     public void highlightAllViableMoves(boolean on) {
-
+        Movement.highlightHorse(tileRef, on, this);
     }
 }
